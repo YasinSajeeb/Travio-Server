@@ -17,6 +17,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run(){
     try{
         const serviceCollection = client.db('travio').collection('services');
+        const reviewCollection = client.db('travio').collection('reviews');
 
         app.get('/services', async(req, res)=>{
             const query = {}
@@ -30,6 +31,12 @@ async function run(){
             const query = { _id: ObjectId(id) };
             const service = await serviceCollection.findOne(query);
             res.send(service);
+        });
+
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+            const result = await reviewCollection.insertOne(review);
+            res.send(result);
         });
 
 
