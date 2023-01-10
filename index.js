@@ -19,6 +19,8 @@ async function run(){
         const serviceCollection = client.db('travio').collection('services');
         const reviewCollection = client.db('travio').collection('reviews');
 
+        // Services Api
+
         app.get('/services', async(req, res)=>{
             const query = {}
             const cursor = serviceCollection.find(query);
@@ -33,6 +35,7 @@ async function run(){
             res.send(service);
         });
 
+        // Review Api
 
         app.get('/reviews', async (req, res) => {
             let query = {};
